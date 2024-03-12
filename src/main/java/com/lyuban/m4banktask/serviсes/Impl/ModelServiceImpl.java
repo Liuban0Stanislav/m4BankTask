@@ -43,7 +43,7 @@ public class ModelServiceImpl implements ModelService {
 
         //проверка на пустую строку имени или строку, содержащую только пробелы
         if (model.getName().matches("^\\s*$")) {
-            return new ResponseDTO(600, "Нельзя вводить пустую строку");
+            return new ResponseDTO(400, "Нельзя вводить пустую строку");
         }
 
         //сохраняем модель в базу данных
@@ -88,13 +88,13 @@ public class ModelServiceImpl implements ModelService {
         //Делаем проверку слагаемых на null, если хоть одно из них null, то возвращаем соответсвующий код
         if (srDTO.getFirst().matches("^\\s*$") && modelRepository.findByName(srDTO.getFirst()) == null ||
                 srDTO.getSecond().matches("^\\s*$") && modelRepository.findByName(srDTO.getSecond()) == null) {
-            return new SumResponseDTO(-1, 610, "Отсутствует одно из слагаемых");
+            return new SumResponseDTO(-1, 400, "Отсутствует одно из слагаемых");
         }
         log.info("Пройдено первое условие");
         //Проверка, если введено неверное имя слагаемого
         if (srDTO.getFirst() != null && modelRepository.findByName(srDTO.getFirst()) == null ||
                 srDTO.getSecond() != null && modelRepository.findByName(srDTO.getSecond()) == null) {
-            return new SumResponseDTO(-1, 620, "Имя слагаемого введено не верно.");
+            return new SumResponseDTO(-1, 400, "Имя слагаемого введено не верно.");
         }
         log.info("Пройдено второе условие");
 
