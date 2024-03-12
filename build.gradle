@@ -11,13 +11,25 @@ java {
 	sourceCompatibility = '17'
 }
 
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation group: 'org.postgresql', name: 'postgresql', version: '42.7.2'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation group: 'com.h2database', name: 'h2', version: '2.2.224'
+	// https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter
+	testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.11.0'
 }
 
 tasks.named('bootBuildImage') {
@@ -26,4 +38,10 @@ tasks.named('bootBuildImage') {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+task createSumServiceJar(type: Jar) {
+	from sourceSets.main.output
+	archiveFileName = 'sum_service.jar'
+	buildDir("/libs")
 }
