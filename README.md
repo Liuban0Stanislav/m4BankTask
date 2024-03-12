@@ -13,7 +13,7 @@
 
 ## Видео
 
-https://github.com/Liuban0Stanislav/m4BankTask/assets/108601150/84ec9434-c676-4ecd-a93b-627ced9b2305
+https://github.com/Liuban0Stanislav/m4BankTask/assets/108601150/491e653f-9521-4f52-aab9-0cc122d8aa8f
 
 
 ## Что сделано
