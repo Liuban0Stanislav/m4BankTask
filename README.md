@@ -1,6 +1,6 @@
 # 4mBank
 
-### [Тестовое задание](https://github.com/Liuban0Stanislav/m4Task/blob/master/task_java.txt)
+### [Тестовое задание](https://github.com/Liuban0Stanislav/m4BankTask/blob/master/task_java.txt)
 
 ## Содержание
 
@@ -12,7 +12,8 @@
 - [Над проектом работал](#над-проектом-работал)
 
 ## Видео
-https://github.com/Liuban0Stanislav/m4Task/assets/108601150/db9ffdcc-df96-4cac-9c4d-8544f1d1af99
+
+https://github.com/Liuban0Stanislav/m4BankTask/assets/108601150/84ec9434-c676-4ecd-a93b-627ced9b2305
 
 
 ## Что сделано
@@ -24,8 +25,8 @@ https://github.com/Liuban0Stanislav/m4Task/assets/108601150/db9ffdcc-df96-4cac-9
 * POST - Получение суммы двух чисел, идентифицируемых их именами;
 * GET - Получить все модели из базы данных.
 
-1) В корневом каталоге проекта можно найти файл с экспортированной коллекцией запросов Postman в формате JSON: [Эндпоинты для Postman](https://github.com/Liuban0Stanislav/m4Task/blob/master/m4Bank.postman_collection.json)
-2) Сборка проекта находится здесь: [sum_service.jar](https://github.com/Liuban0Stanislav/m4Task/tree/master/GradleJar)
+1) В корневом каталоге проекта можно найти файл с экспортированной коллекцией запросов Postman в формате JSON: [Эндпоинты для Postman](https://github.com/Liuban0Stanislav/m4BankTask/blob/master/m4Bank.postman_collection.json)
+2) Скрипт на сборку проекта находится здесь: [sum_service.jar](https://github.com/Liuban0Stanislav/m4BankTask/blob/master/build.gradle)
 
 <br>Для запуска используйте команду: java -jar sum_service.jar</br>
 <br>Для остановки проекта нажмите Ctrl + C</br>
@@ -41,13 +42,13 @@ https://github.com/Liuban0Stanislav/m4Task/assets/108601150/db9ffdcc-df96-4cac-9
 
 ## Описание проекта
 Для выполнения поставленной задачи, была создана сущность: 
-* [Model](https://github.com/Liuban0Stanislav/m4Task/blob/dev/models/Model.java)
+* [Model](https://github.com/Liuban0Stanislav/m4BankTask/blob/master/src/main/java/com/lyuban/m4banktask/models/Model.java)
 
 Для настройки ответов JSON и исключениями был использован класс ExceptionHandler:
-* [MyExceptionHandler](https://github.com/Liuban0Stanislav/m4Task/blob/dev/servlets/MyExceptionHandler.java)
+* [MyExceptionHandler](https://github.com/Liuban0Stanislav/m4BankTask/blob/master/src/main/java/com/lyuban/m4banktask/servlets/MyExceptionHandler.java)
 
 Для логирования методов используется класс MethodInspector
-* [MethodInspector](https://github.com/Liuban0Stanislav/m4Task/blob/dev/servlets/MethodInspector.java)
+* [MethodInspector](https://github.com/Liuban0Stanislav/m4BankTask/blob/master/src/main/java/com/lyuban/m4banktask/servlets/MethodInspector.java)
 
 ### Ошибки обрабатываемые в ендпоинте "Добавить модель"
 - "code": 600, "description": "Нельзя вводить пустую строку" - запрет ввода имен вида "", и "  ";
