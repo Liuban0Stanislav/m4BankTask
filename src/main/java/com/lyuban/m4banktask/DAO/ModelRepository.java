@@ -1,4 +1,4 @@
-package com.lyuban.m4banktask.repositories;
+package com.lyuban.m4banktask.DAO;
 
 import com.lyuban.m4banktask.models.Model;
 import org.springframework.data.jpa.repository.JpaRepository;

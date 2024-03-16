@@ -30,6 +30,15 @@ dependencies {
 	testImplementation group: 'com.h2database', name: 'h2', version: '2.2.224'
 	// https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter
 	testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.11.0'
+
+// https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core
+	implementation group: 'org.hibernate.orm', name: 'hibernate-core', version: '6.4.4.Final'
+// https://mvnrepository.com/artifact/org.springframework/spring-orm
+	implementation group: 'org.springframework', name: 'spring-orm', version: '6.1.4'
+// https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-dbcp
+	implementation group: 'org.apache.tomcat', name: 'tomcat-dbcp', version: '11.0.0-M18'
+	implementation 'org.hibernate:hibernate-core:5.5.7.Final'
+
 }
 
 tasks.named('bootBuildImage') {
