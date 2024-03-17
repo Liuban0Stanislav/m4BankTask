@@ -1,8 +1,7 @@
 package com.lyuban.m4banktask.configs;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-import org.postgresql.shaded.com.ongres.scram.common.util.Preconditions;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -17,16 +16,21 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 public class HibernateConf {
-    private Environment env;
-    public HibernateConf(Environment env) {
-        this.env = env;
-    }
+
+    @Value("${spring.datasource.url}")
+    private String url;
+
+    @Value("${spring.datasource.username}")
+    private String username;
+
+    @Value("${spring.datasource.password}")
+    private String password;
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan(
-                new String[]{"com.baeldung.hibernate.bootstrap.model"});
+                new String[]{"com.lyuban.m4banktask.models"});
         sessionFactory.setHibernateProperties(hibernateProperties());
 
         return sessionFactory;
@@ -35,12 +39,11 @@ public class HibernateConf {
     @Bean
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName(env.getProperty("org.postgresql.Driver"));
-        dataSource.setUrl(env.getProperty("jdbc:postgresql://localhost:5432/m4BD"));
-        dataSource.setUsername(env.getProperty("user"));
-        dataSource.setPassword(env.getProperty("user"));
+        dataSource.setUrl(url);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
 
-        return (DataSource) dataSource;
+        return dataSource;
     }
 
     @Bean

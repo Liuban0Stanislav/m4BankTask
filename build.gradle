@@ -39,6 +39,12 @@ dependencies {
 	implementation group: 'org.apache.tomcat', name: 'tomcat-dbcp', version: '11.0.0-M18'
 	implementation 'org.hibernate:hibernate-core:5.5.7.Final'
 
+	// https://mvnrepository.com/artifact/javax.validation/validation-api
+	implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+// https://mvnrepository.com/artifact/org.hibernate/hibernate-validator
+	implementation group: 'org.hibernate', name: 'hibernate-validator', version: '8.0.1.Final'
+
+
 }
 
 tasks.named('bootBuildImage') {
