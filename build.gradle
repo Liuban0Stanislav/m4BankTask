@@ -23,11 +23,11 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation group: 'org.postgresql', name: 'postgresql', version: '42.7.2'
 	annotationProcessor 'org.projectlombok:lombok'
 	implementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation group: 'com.h2database', name: 'h2', version: '2.2.224'
+//	testImplementation group: 'com.h2database', name: 'h2', version: '2.2.224'
 	// https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter
 	testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.11.0'
 
@@ -40,11 +40,9 @@ dependencies {
 // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-dbcp
 	implementation group: 'org.apache.tomcat', name: 'tomcat-dbcp', version: '11.0.0-M18'
 
-	// https://mvnrepository.com/artifact/javax.validation/validation-api
-	implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
 // https://mvnrepository.com/artifact/org.hibernate/hibernate-validator
 	implementation group: 'org.hibernate', name: 'hibernate-validator', version: '8.0.1.Final'
-
+	implementation 'javax.persistence:javax.persistence-api:2.2'
 
 }
 

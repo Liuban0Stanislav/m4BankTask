@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.List;
 
 public interface ModelService {
+
+    void getAll();
     /**
      * Метод добавления пары имя-значение в БД.
      * @param model объект {@link Model}
@@ -23,6 +25,7 @@ public interface ModelService {
      * @returs: {@link RemoveRequestDTO}
      */
     ResponseDTO remove(RemoveRequestDTO rrDTO) throws IOException;
+
 //
 //    /**
 //     * Метод получения суммы двух чисел, идентифицируемых их именами.

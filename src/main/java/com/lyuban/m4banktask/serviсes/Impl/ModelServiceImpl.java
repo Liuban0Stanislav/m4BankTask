@@ -6,8 +6,9 @@ import com.lyuban.m4banktask.DTO.ResponseDTO;
 import com.lyuban.m4banktask.DTO.SumRequestDTO;
 import com.lyuban.m4banktask.DTO.SumResponseDTO;
 import com.lyuban.m4banktask.models.Model;
-import com.lyuban.m4banktask.DAO.ModelRepository;
+
 import com.lyuban.m4banktask.serviсes.ModelService;
+import javax.persistence.EntityManagerFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,10 @@ public class ModelServiceImpl implements ModelService {
 
     public ModelServiceImpl(MyJPACriteria myJPACriteria) {
         this.myJPACriteria = myJPACriteria;
+    }
+
+    public void getAll(){
+        myJPACriteria.getAll();
     }
 
     /**

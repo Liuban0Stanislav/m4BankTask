@@ -30,6 +30,12 @@ public class ModelController {
     public ModelController(ModelService modelService) {
         this.modelService = modelService;
     }
+
+    @GetMapping("/getall")
+    public void getAll(){
+        modelService.getAll();
+    }
+
     /**
      * Метод добавления пары имя-значение в БД.
      * @param model объект {@link Model}
