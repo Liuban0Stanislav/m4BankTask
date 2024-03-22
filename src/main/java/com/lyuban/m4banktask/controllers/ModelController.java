@@ -43,7 +43,7 @@ public class ModelController {
      */
     @PostMapping("/add")
     public ResponseDTO add(@RequestBody Model model){
-        log.info("вызван метод контроллера "+ getCurrentClassName() + ": " + getCurrentMethodName());
+//        log.info("вызван метод контроллера "+ getCurrentClassName() + ": " + getCurrentMethodName());
         return modelService.add(model);
     }
     /**
@@ -53,7 +53,7 @@ public class ModelController {
      */
     @PostMapping("/remove")
     public ResponseDTO remove (@RequestBody RemoveRequestDTO rrDTO) throws IOException {
-        log.info("вызван метод контроллера "+ getCurrentClassName() + ": " + getCurrentMethodName());
+//        log.info("вызван метод контроллера "+ getCurrentClassName() + ": " + getCurrentMethodName());
         return modelService.remove(rrDTO);
     }
 //

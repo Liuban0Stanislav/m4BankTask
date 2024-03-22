@@ -1,61 +1,98 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.1.9'
-	id 'io.spring.dependency-management' version '1.1.4'
+    id 'java'
+    id 'org.springframework.boot' version '3.1.9'
+    id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'com.lyuban'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+    sourceCompatibility = '17'
 }
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation group: 'org.postgresql', name: 'postgresql', version: '42.7.2'
-	annotationProcessor 'org.projectlombok:lombok'
-	implementation 'org.springframework.boot:spring-boot-starter-test'
-//	testImplementation group: 'com.h2database', name: 'h2', version: '2.2.224'
-	// https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter
-	testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.11.0'
+    // Spring Boot dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-// https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core
-	implementation group: 'org.hibernate.orm', name: 'hibernate-core', version: '6.4.4.Final'
-	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
-	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
-// https://mvnrepository.com/artifact/org.springframework/spring-orm
-	implementation group: 'org.springframework', name: 'spring-orm', version: '6.1.4'
-// https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-dbcp
-	implementation group: 'org.apache.tomcat', name: 'tomcat-dbcp', version: '11.0.0-M18'
+    // Lombok
+    implementation 'org.projectlombok:lombok:1.18.20'
 
-// https://mvnrepository.com/artifact/org.hibernate/hibernate-validator
-	implementation group: 'org.hibernate', name: 'hibernate-validator', version: '8.0.1.Final'
-	implementation 'javax.persistence:javax.persistence-api:2.2'
+    // PostgreSQL
+    implementation 'org.postgresql:postgresql:42.7.2'
 
+
+    // Spring Boot Test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // H2 Database
+    testImplementation 'com.h2database:h2:2.2.224'
+
+    // Mockito with JUnit 5
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.11.0'
+
+    implementation 'javax.persistence:javax.persistence-api:2.2'
+
+	implementation group: 'org.hibernate.orm', name: 'hibernate-core', version: '6.0.0.Final'
+//	implementation group: 'org.eclipse.persistence', name: 'eclipselink', version: '2.5.1'
+//	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
+//	implementation group: 'org.springframework', name: 'spring-orm', version: '6.1.4'
+//	implementation group: 'org.apache.tomcat', name: 'tomcat-dbcp', version: '11.0.0-M18'
+//	implementation group: 'org.hibernate', name: 'hibernate-validator', version: '8.0.1.Final'
+//	implementation 'javax.persistence:javax.persistence-api:2.2'
 }
 
+//dependencies {
+//	implementation 'org.springframework.boot:spring-boot-starter-web'
+////	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//	implementation group: 'org.postgresql', name: 'postgresql', version: '42.7.2'
+//	annotationProcessor 'org.projectlombok:lombok'
+//	implementation 'org.springframework.boot:spring-boot-starter-test'
+////	testImplementation group: 'com.h2database', name: 'h2', version: '2.2.224'
+//	// https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter
+//	testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.11.0'
+//
+//// https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core
+//	implementation group: 'org.hibernate.orm', name: 'hibernate-core', version: '6.0.0.Final'
+////	implementation group: 'org.hibernate', name: 'hibernate-entitymanager', version: '6.0.0.Final'
+////	implementation group: 'org.hibernate', name: 'hibernate-entitymanager', version: '6.0.0.Alpha7', ext: 'pom'
+////	implementation group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.4.4.Final'
+////	implementation group: 'org.eclipse.persistence', name: 'eclipselink', version: '2.5.1'
+//
+//	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+//	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
+//// https://mvnrepository.com/artifact/org.springframework/spring-orm
+//	implementation group: 'org.springframework', name: 'spring-orm', version: '6.1.4'
+//// https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-dbcp
+//	implementation group: 'org.apache.tomcat', name: 'tomcat-dbcp', version: '11.0.0-M18'
+//
+//// https://mvnrepository.com/artifact/org.hibernate/hibernate-validator
+//	implementation group: 'org.hibernate', name: 'hibernate-validator', version: '8.0.1.Final'
+//	implementation 'javax.persistence:javax.persistence-api:2.2'
+//
+//}
+
 tasks.named('bootBuildImage') {
-	builder = 'paketobuildpacks/builder-jammy-base:latest'
+    builder = 'paketobuildpacks/builder-jammy-base:latest'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
 
 task createSumServiceJar(type: Jar) {
-	from sourceSets.main.output
-	archiveFileName = 'sum_service.jar'
-	buildDir("/libs")
+    from sourceSets.main.output
+    archiveFileName = 'sum_service.jar'
+    buildDir("/libs")
 }
