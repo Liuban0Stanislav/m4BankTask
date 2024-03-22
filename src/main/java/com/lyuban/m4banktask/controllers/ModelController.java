@@ -30,6 +30,12 @@ public class ModelController {
     public ModelController(ModelService modelService) {
         this.modelService = modelService;
     }
+
+    @GetMapping("/getall")
+    public void getAll(){
+        modelService.getAll();
+    }
+
     /**
      * Метод добавления пары имя-значение в БД.
      * @param model объект {@link Model}
@@ -37,7 +43,7 @@ public class ModelController {
      */
     @PostMapping("/add")
     public ResponseDTO add(@RequestBody Model model){
-        log.info("вызван метод контроллера "+ getCurrentClassName() + ": " + getCurrentMethodName());
+//        log.info("вызван метод контроллера "+ getCurrentClassName() + ": " + getCurrentMethodName());
         return modelService.add(model);
     }
     /**
@@ -47,21 +53,22 @@ public class ModelController {
      */
     @PostMapping("/remove")
     public ResponseDTO remove (@RequestBody RemoveRequestDTO rrDTO) throws IOException {
-        log.info("вызван метод контроллера "+ getCurrentClassName() + ": " + getCurrentMethodName());
+//        log.info("вызван метод контроллера "+ getCurrentClassName() + ": " + getCurrentMethodName());
         return modelService.remove(rrDTO);
     }
-    /**
-     * Метод получения суммы двух чисел, идентифицируемых их именами.
-     * @param srDTO форма {@link SumRequestDTO} содержащая первое и второе слагаемые.
-     * @return форма содержащая сумму, код ответа и описание этого кода {@link SumResponseDTO}.
-     */
-    @PostMapping("/sum")
-    public SumResponseDTO sum(@RequestBody SumRequestDTO srDTO){
-        log.info("вызван метод контроллера "+ getCurrentClassName() + ": " + getCurrentMethodName());
-        return modelService.sum(srDTO);
-    }
-    @GetMapping
-    public List<Model> getAll(){
-        return modelService.getAll();
-    }
+//
+//    /**
+//     * Метод получения суммы двух чисел, идентифицируемых их именами.
+//     * @param srDTO форма {@link SumRequestDTO} содержащая первое и второе слагаемые.
+//     * @return форма содержащая сумму, код ответа и описание этого кода {@link SumResponseDTO}.
+//     */
+//    @PostMapping("/sum")
+//    public SumResponseDTO sum(@RequestBody SumRequestDTO srDTO){
+//        log.info("вызван метод контроллера "+ getCurrentClassName() + ": " + getCurrentMethodName());
+//        return modelService.sum(srDTO);
+//    }
+//    @GetMapping
+//    public List<Model> getAll(){
+//        return modelService.getAll();
+//    }
 }

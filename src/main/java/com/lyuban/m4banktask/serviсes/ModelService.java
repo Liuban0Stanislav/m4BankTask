@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.List;
 
 public interface ModelService {
+
+    void getAll();
     /**
      * Метод добавления пары имя-значение в БД.
      * @param model объект {@link Model}
@@ -24,16 +26,17 @@ public interface ModelService {
      */
     ResponseDTO remove(RemoveRequestDTO rrDTO) throws IOException;
 
-    /**
-     * Метод получения суммы двух чисел, идентифицируемых их именами.
-     * @param srDTO форма {@link SumRequestDTO} содержащая первое и второе слагаемые.
-     * @return форма содержащая сумму, код ответа и описание этого кода {@link SumResponseDTO}.
-     */
-    SumResponseDTO sum(SumRequestDTO srDTO);
-
-    /**
-     * Метод для получения всех моделей из БД.
-     * @return список моделей
-     */
-    List<Model> getAll();
+//
+//    /**
+//     * Метод получения суммы двух чисел, идентифицируемых их именами.
+//     * @param srDTO форма {@link SumRequestDTO} содержащая первое и второе слагаемые.
+//     * @return форма содержащая сумму, код ответа и описание этого кода {@link SumResponseDTO}.
+//     */
+//    SumResponseDTO sum(SumRequestDTO srDTO);
+//
+//    /**
+//     * Метод для получения всех моделей из БД.
+//     * @return список моделей
+//     */
+//    List<Model> getAll();
 }

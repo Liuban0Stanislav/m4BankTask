@@ -1,0 +1,43 @@
+<!--<persistence-unit name="myPersistenceUnit" transaction-type="RESOURCE_LOCAL">-->
+<!--    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
+<!--    <description>m4banktask persistence unit</description>-->
+<!--    <class>com.lyuban.m4banktask.models.Model</class>-->
+<!--    <exclude-unlisted-classes>true</exclude-unlisted-classes>-->
+<!--    <properties>-->
+<!--        <property name="hibernate.dialect" value="org.hibernate.dialect.PostgresDialect"/>-->
+<!--        <property name="hibernate.hbm2ddl.auto" value="update"/>-->
+<!--        <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>-->
+<!--        <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/m4BD"/>-->
+<!--        <property name="javax.persistence.jdbc.user" value="user"/>-->
+<!--        <property name="javax.persistence.jdbc.password" value="user"/>-->
+<!--        <property name="eclipselink.logging.level" value="FINE"/>-->
+<!--        <property name="eclipselink.ddl-generation" value="create-tables"/>-->
+<!--        <property name="eclipselink.ddl-generation.output-mode" value="database"/>-->
+<!--    </properties>-->
+<!--</persistence-unit>-->
+
+<!--<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence">-->
+<!--    <persistence-unit name="myPersistenceUnit" transaction-type="RESOURCE_LOCAL">-->
+<!--        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
+<!--        <properties>-->
+<!--            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>-->
+<!--            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mydb"/>-->
+<!--            <property name="javax.persistence.jdbc.user" value="username"/>-->
+<!--            <property name="javax.persistence.jdbc.password" value="password"/>-->
+<!--        </properties>-->
+<!--    </persistence-unit>-->
+<!--</persistence>-->
+
+<persistence-unit name="myPersistenceUnit" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>com.lyuban.m4banktask.models.Model</class>
+    <properties>
+        <!-- Using Hibernate-specific properties -->
+        <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+        <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/m4BD"/>
+        <property name="hibernate.connection.username" value="user"/>
+        <property name="hibernate.connection.password" value="user"/>
+        <!-- You might also need to specify the dialect -->
+        <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+    </properties>
+</persistence-unit>

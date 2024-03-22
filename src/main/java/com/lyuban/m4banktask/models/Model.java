@@ -2,8 +2,8 @@ package com.lyuban.m4banktask.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor

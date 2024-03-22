@@ -1,12 +1,14 @@
 package com.lyuban.m4banktask.serviсes.Impl;
 
+import com.lyuban.m4banktask.DAO.MyJPACriteria;
 import com.lyuban.m4banktask.DTO.RemoveRequestDTO;
 import com.lyuban.m4banktask.DTO.ResponseDTO;
 import com.lyuban.m4banktask.DTO.SumRequestDTO;
 import com.lyuban.m4banktask.DTO.SumResponseDTO;
 import com.lyuban.m4banktask.models.Model;
-import com.lyuban.m4banktask.repositories.ModelRepository;
+
 import com.lyuban.m4banktask.serviсes.ModelService;
+import javax.persistence.EntityManagerFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +27,14 @@ import static com.lyuban.m4banktask.servlets.MethodInspector.getCurrentMethodNam
 @Slf4j
 @Service
 public class ModelServiceImpl implements ModelService {
-    private final ModelRepository modelRepository;
+    private final MyJPACriteria myJPACriteria;
 
-    public ModelServiceImpl(ModelRepository modelRepository) {
-        this.modelRepository = modelRepository;
+    public ModelServiceImpl(MyJPACriteria myJPACriteria) {
+        this.myJPACriteria = myJPACriteria;
+    }
+
+    public void getAll(){
+        myJPACriteria.getAll();
     }
 
     /**
@@ -48,7 +54,7 @@ public class ModelServiceImpl implements ModelService {
 
         //сохраняем модель в базу данных
         //если из метода save() вернулась такая же сущность как и параметр метода, то возвращаем ДТО с ответом ok
-        if (modelRepository.save(model).equals(model)) {
+        if (myJPACriteria.save(model).equals(model)) {
             return new ResponseDTO(200, "ok");
         }
         return new ResponseDTO(0, "По умолчанию");
@@ -67,53 +73,53 @@ public class ModelServiceImpl implements ModelService {
         //извлекаем имя из ДТО
         String name = rrDTO.getName();
 
-        //находим модель в БД по имени
-        Model model = modelRepository.findByName(name);
-
-        //удаляем найденную модель
-        modelRepository.delete(model);
-        return new ResponseDTO(200, "ok");
-    }
-
-    /**
-     * Метод получения суммы двух чисел, идентифицируемых их именами.
-     *
-     * @param srDTO форма {@link SumRequestDTO} содержащая первое и второе слагаемые.
-     * @return форма содержащая сумму, код ответа и описание этого кода {@link SumResponseDTO}.
-     */
-    @Override
-    public SumResponseDTO sum(SumRequestDTO srDTO) {
-        log.info("вызван метод сервиса " + getCurrentClassName() + ": " + getCurrentMethodName());
-
-        //Делаем проверку слагаемых на null, если хоть одно из них null, то возвращаем соответсвующий код
-        if (srDTO.getFirst().matches("^\\s*$") && modelRepository.findByName(srDTO.getFirst()) == null ||
-                srDTO.getSecond().matches("^\\s*$") && modelRepository.findByName(srDTO.getSecond()) == null) {
-            return new SumResponseDTO(-1, 400, "Отсутствует одно из слагаемых");
+        //удаляем модель gпо ее имени
+        if (myJPACriteria.delete(name)) {
+            return new ResponseDTO(200, "ok");
+        } else {
+            return null;
         }
-        log.info("Пройдено первое условие");
-        //Проверка, если введено неверное имя слагаемого
-        if (srDTO.getFirst() != null && modelRepository.findByName(srDTO.getFirst()) == null ||
-                srDTO.getSecond() != null && modelRepository.findByName(srDTO.getSecond()) == null) {
-            return new SumResponseDTO(-1, 400, "Имя слагаемого введено не верно.");
-        }
-        log.info("Пройдено второе условие");
-
-        //Извлекаем из ДТО поля name и ищем по ним значения в БД
-        Integer first = modelRepository.findByName(srDTO.getFirst()).getValue();
-        log.info("первое слагаемое: {}", first);
-        Integer second = modelRepository.findByName(srDTO.getSecond()).getValue();
-        log.info("Второе слагаемое: {}", second);
-        int rez = first + second;
-        log.info("Результат сложения: {}", rez);
-        return new SumResponseDTO(rez, 200, "ok");
     }
-
-    /**
-     * Метод для получения всех моделей из БД.
-     *
-     * @return список моделей
-     */
-    public List<Model> getAll() {
-        return modelRepository.findAll();
-    }
+//
+//    /**
+//     * Метод получения суммы двух чисел, идентифицируемых их именами.
+//     *
+//     * @param srDTO форма {@link SumRequestDTO} содержащая первое и второе слагаемые.
+//     * @return форма содержащая сумму, код ответа и описание этого кода {@link SumResponseDTO}.
+//     */
+//    @Override
+//    public SumResponseDTO sum(SumRequestDTO srDTO) {
+//        log.info("вызван метод сервиса " + getCurrentClassName() + ": " + getCurrentMethodName());
+//
+//        //Делаем проверку слагаемых на null, если хоть одно из них null, то возвращаем соответсвующий код
+//        if (srDTO.getFirst().matches("^\\s*$") && modelRepository.findByName(srDTO.getFirst()) == null ||
+//                srDTO.getSecond().matches("^\\s*$") && modelRepository.findByName(srDTO.getSecond()) == null) {
+//            return new SumResponseDTO(-1, 400, "Отсутствует одно из слагаемых");
+//        }
+//        log.info("Пройдено первое условие");
+//        //Проверка, если введено неверное имя слагаемого
+//        if (srDTO.getFirst() != null && modelRepository.findByName(srDTO.getFirst()) == null ||
+//                srDTO.getSecond() != null && modelRepository.findByName(srDTO.getSecond()) == null) {
+//            return new SumResponseDTO(-1, 400, "Имя слагаемого введено не верно.");
+//        }
+//        log.info("Пройдено второе условие");
+//
+//        //Извлекаем из ДТО поля name и ищем по ним значения в БД
+//        Integer first = modelRepository.findByName(srDTO.getFirst()).getValue();
+//        log.info("первое слагаемое: {}", first);
+//        Integer second = modelRepository.findByName(srDTO.getSecond()).getValue();
+//        log.info("Второе слагаемое: {}", second);
+//        int rez = first + second;
+//        log.info("Результат сложения: {}", rez);
+//        return new SumResponseDTO(rez, 200, "ok");
+//    }
+//
+//    /**
+//     * Метод для получения всех моделей из БД.
+//     *
+//     * @return список моделей
+//     */
+//    public List<Model> getAll() {
+//        return modelRepository.findAll();
+//    }
 }
